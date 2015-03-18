@@ -93,6 +93,26 @@ the `production` one.
     end
     ```
 
+    # bad
+    get 'profile', to: 'users#show'
+    
+
+    # good
+    get 'profile', to: :show
+    ```
+
+    # bad
+    resources :articles do
+      resources :comments, only: [:index, :new, :create]
+    end
+    resources :comments, only: [:show, :edit, :update, :destroy]
+
+    # good
+    resources :articles do
+      resources :comments, shallow: true
+    end
+    ```
+
 * If you need to define multiple `member/collection` routes use the
   alternative block syntax.
 
